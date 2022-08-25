@@ -97,9 +97,16 @@ public class OrganizationService {
 		val std = organizationRepository.findByOrganizationCode(organizationCode);
 
 		if (Optional.ofNullable(std).isPresent()) {
-			res.put("message", "Success.");
-			res.put("data", std);
-			res.put("code", HttpStatus.OK.value());
+			res.put("id", std.getId());
+			res.put("organizationCode", std.getOrganizationCode());
+			res.put("organizationName", std.getOrganizationName());
+			res.put("organizationPhone", std.getOrganizationPhone());
+			res.put("organizationAddress", std.getOrganizationAddress());
+			res.put("organizationLat", std.getOrganizationLat());
+			res.put("organizationLong", std.getOrganizationLong());
+			res.put("organizationRadius", std.getOrganizationRadius());
+			res.put("createdAt", std.getCreatedDate());
+			res.put("updatedAt", std.getLastModifiedDate());
 			return ResponseEntity.status(HttpStatus.OK).headers(headers).body(res);
 		} else {
 			res.put("message", "organizationCode is Not Found.");
