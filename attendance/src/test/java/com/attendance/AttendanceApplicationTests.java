@@ -1,0 +1,126 @@
+package com.attendance;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+
+import com.attendance.model.Attendance;
+import com.attendance.repository.AttendanceRepository;
+import com.ulisesbocchio.jasyptspringboot.configuration.EnableEncryptablePropertiesConfiguration;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = Replace.NONE)
+@Import(EnableEncryptablePropertiesConfiguration.class)
+class AttendanceApplicationTests {
+
+	@Autowired
+	private AttendanceRepository attendanceRepository;
+
+	@Test
+	public void testCreateAttendance() {
+
+		Attendance attendance = new Attendance();
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		Attendance res = attendanceRepository.save(attendance);
+		assertNotNull(res);
+	}
+
+	@Test
+	public void testGetAttendance() {
+
+		Attendance attendance = new Attendance();
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		attendanceRepository.save(attendance);
+		
+		Attendance res = attendanceRepository.findByEmployeeCode("20220800001");
+		assertNotNull(res);
+	}
+
+	@Test
+	public void testGetAttendances() {
+
+		Attendance attendance = new Attendance();
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		attendanceRepository.save(attendance);
+		
+		List<Attendance> res = attendanceRepository.findAll();
+		assertThat(res).size().isGreaterThan(0);
+	}
+
+	@Test
+	public void testUpdateAttendance() {
+		
+		Attendance attendance = new Attendance();
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		attendanceRepository.save(attendance);
+		
+		Attendance attendanceUpdate = attendanceRepository.findByEmployeeCode("20220800001");
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		Attendance resUpdate = attendanceRepository.save(attendanceUpdate);
+		assertNotNull(resUpdate);
+	}
+
+	@Test
+	public void testDeleteAttendance() {
+		Attendance attendance = new Attendance();
+
+		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendanceLong(106.8219903d);
+		attendance.setAttendanceLat(-6.3402008d);
+		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
+		attendance.setAttendanceType("Clock In");
+		attendance.setEmployeeCode("20220800001");
+
+		attendanceRepository.save(attendance);
+		
+		Attendance attendanceDelete = attendanceRepository.findByEmployeeCode("20220800001");
+
+		attendanceRepository.delete(attendanceDelete);
+
+		assertNull(attendanceRepository.findByEmployeeCode("20220800001"));
+	}
+}
