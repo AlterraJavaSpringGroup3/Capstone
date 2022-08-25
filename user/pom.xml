@@ -8,11 +8,11 @@
 		<version>2.5.9</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.employee</groupId>
-	<artifactId>employee</artifactId>
+	<groupId>com.user</groupId>
+	<artifactId>user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>employee</name>
-	<description>Employee Service</description>
+	<name>user</name>
+	<description>User Service</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -141,19 +141,19 @@
 						<image>openjdk:alpine</image>
 					</from>
 					<to>
-						<image>employee:latest</image>
+						<image>user:latest</image>
 					</to>
 					<allowInsecureRegistries>true</allowInsecureRegistries>
 					<container>
-						<mainClass>com.employee.employeeApplication
+						<mainClass>com.user.userApplication
 						</mainClass>
 						<ports>
-							<port>8084</port>
+							<port>8082</port>
 						</ports>
 					</container>
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>employee</finalName>
+		<finalName>user</finalName>
 	</build>
 </project>

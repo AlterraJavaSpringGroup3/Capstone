@@ -30,7 +30,7 @@ class UserApplicationTests {
 
 		User user = new User();
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
@@ -44,14 +44,14 @@ class UserApplicationTests {
 
 		User user = new User();
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
 
 		userRepository.save(user);
 		
-		User res = userRepository.findByUserName("mashumabduljabbar");
+		User res = userRepository.findByUserName("userTESTING");
 		assertNotNull(res);
 	}
 
@@ -60,7 +60,7 @@ class UserApplicationTests {
 
 		User user = new User();
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
@@ -75,16 +75,16 @@ class UserApplicationTests {
 		
 		User user = new User();
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
 
 		userRepository.save(user);
 		
-		User userUpdate = userRepository.findByUserName("mashumabduljabbar");
+		User userUpdate = userRepository.findByUserName("userTESTING");
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
@@ -97,17 +97,17 @@ class UserApplicationTests {
 	public void testDeleteUser() {
 		User user = new User();
 
-		user.setUserName("mashumabduljabbar");
+		user.setUserName("userTESTING");
 		user.setUserPassword("mashum**123");
 		user.setUserRoles("PEGAWAI");
 		user.setEmployeeCode("IKON");
 
 		userRepository.save(user);
 		
-		User userDelete = userRepository.findByUserName("mashumabduljabbar");
+		User userDelete = userRepository.findByUserName("userTESTING");
 
 		userRepository.delete(userDelete);
 
-		assertNull(userRepository.findByUserName("mashumabduljabbar"));
+		assertNull(userRepository.findByUserName("userTESTING"));
 	}
 }
