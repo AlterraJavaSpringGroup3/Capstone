@@ -43,10 +43,15 @@ public class ServiceCall {
 			json = readJsonFromUrl(sURL);
 		} catch (JSONException | IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			json = null;
 		}
-		organizationName = json.get("data").toString();
-		return organizationName;
+		
+		if(json!=null) {
+			organizationName = json.get("organizationName").toString();
+			return organizationName;
+		}else {
+			return null;
+		}
 	}
 
 	public static String json(String sURL) {
