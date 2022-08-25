@@ -89,9 +89,15 @@ public class EmployeeService {
 		val std = employeeRepository.findByEmployeeCode(employeeCode);
 
 		if (Optional.ofNullable(std).isPresent()) {
-			res.put("message", "Success.");
-			res.put("data", std);
-			res.put("code", HttpStatus.OK.value());
+			res.put("id", std.getId());
+			res.put("organizationCode", std.getEmployeeCode());
+			res.put("employeeName", std.getEmployeeName());
+			res.put("employeePhone", std.getEmployeePhone());
+			res.put("employeeAddress", std.getEmployeeAddress());
+			res.put("organizationCode", std.getOrganizationCode());
+			res.put("organizationName", ServiceCall.organizationName(std.getOrganizationCode()));
+			res.put("createdAt", std.getCreatedDate());
+			res.put("updatedAt", std.getLastModifiedDate());
 			return ResponseEntity.status(HttpStatus.OK).headers(headers).body(res);
 		} else {
 			res.put("message", "employeeCode is Not Found.");
