@@ -1,0 +1,62 @@
+server:
+  port: 8086
+spring:
+  profiles:
+    active: native
+  application:
+    name: FILE
+  zipkin:
+    base-url: http://localhost:9411/
+  devtools:
+    livereload:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://dbcapstone.cvlnnrwyt452.ap-south-1.rds.amazonaws.com:3306/DBCapstone?allowPublicKeyRetrieval=true&&useSSL=false
+    username: organization
+    password: ENC(YhgG3uKvpd6BxTpvn4i4E7tywGJXjmTU)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: 
+        '[format_sql]': true
+        '[use_sql_comments]': true
+        '[order_insert]': true
+        '[order_updates]': true
+        '[generate_statistics]': true
+jasypt:
+  encryptor:
+    password: secret
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+logging:
+  file:
+    name: logs/attendance.log
+    max-size: 10MB
+    max-history: 365
+  level:
+    root: INFO
+    '[org.hibernate.sql]': DEBUG
+    '[org.hibernate.type.descriptor.sql]': TRACE
+management:
+  endpoints:
+    web:
+      base-path: /act
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      enabled: true
+    diskspace:
+      enabled: true
+    ping:
+      enabled: true
+    livenessstate:
+      enabled: true
