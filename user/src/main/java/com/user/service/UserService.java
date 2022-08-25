@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -90,17 +89,13 @@ public class UserService {
 
 		if (Optional.ofNullable(std).isPresent()) {
 			String employeeName = ServiceCall.employeeName(std.getEmployeeCode());
-			
-			Map<String, Object> data = new HashMap<String, Object>();   
-			data.put("id", std.getId());
-			data.put("userName", std.getUserName());
-			data.put("employeeName", employeeName);
-			data.put("userRoles",  std.getUserRoles());
-			data.put("employeeCode",  std.getEmployeeCode());
-			
-			res.put("message", "Success.");
-			res.put("data", data);
-			res.put("code", HttpStatus.OK.value());
+			res.put("id", std.getId());
+			res.put("userName", std.getUserName());
+			res.put("userRoles",  std.getUserRoles());
+			res.put("employeeCode",  std.getEmployeeCode());
+			res.put("employeeName", employeeName);
+			res.put("createdAt", std.getCreatedDate());
+			res.put("updatedAt", std.getLastModifiedDate());
 			return ResponseEntity.status(HttpStatus.OK).headers(headers).body(res);
 		} else {
 			res.put("message", "userName is Not Found.");
