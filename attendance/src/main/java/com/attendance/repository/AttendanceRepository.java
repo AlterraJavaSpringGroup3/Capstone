@@ -7,6 +7,6 @@ import com.attendance.model.Attendance;
 
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-	public Attendance findByEmployeeCode(String attendance);
-	public Attendance findById(String attendance);
+	public Attendance findById(int attendance);
+	public Attendance findByAttendancePhoto(String string);
 }
