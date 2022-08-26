@@ -1,0 +1,119 @@
+version: '2'
+services:
+    service-registry:
+        container_name: service-registry
+        build:
+            context: service-registry
+            dockerfile: Dockerfile
+        image: capstone-service-registry:latest
+        ports:
+            - 8761:8761
+        networks:
+            - spring-cloud-network
+    config-server:
+        container_name: config-server
+        build:
+            context: config-server
+            dockerfile: Dockerfile
+        image: capstone-config-server:latest
+        ports:
+            - 9269:9269
+        networks:
+            - spring-cloud-network
+        environment:
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+            eureka.instance.hostname: service-registry
+    spring-gateway:
+        container_name: spring-gateway
+        build:
+            context: spring-gateway
+            dockerfile: Dockerfile
+        image: capstone-spring-gateway:latest
+        ports:
+            - 8080:7171
+        networks:
+            - spring-cloud-network
+        environment:
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+            eureka.instance.hostname: service-registry
+    organization:
+        container_name: organization
+        build:
+            context: organization
+            dockerfile: Dockerfile
+        image: capstone-organization:latest
+        ports:
+            - 8081:8081
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+    user:
+        container_name: user
+        build:
+            context: user
+            dockerfile: Dockerfile
+        image: capstone-user:latest
+        ports:
+            - 8082:8082
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+    auth:
+        container_name: auth
+        build:
+            context: auth
+            dockerfile: Dockerfile
+        image: capstone-auth:latest
+        ports:
+            - 8083:8083
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+    employee:
+        container_name: employee
+        build:
+            context: employee
+            dockerfile: Dockerfile
+        image: capstone-employee:latest
+        ports:
+            - 8084:8084
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+    attendance:
+        container_name: attendance
+        build:
+            context: attendance
+            dockerfile: Dockerfile
+        image: capstone-attendance:latest
+        ports:
+            - 8085:8085
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+    file:
+        container_name: file
+        build:
+            context: file
+            dockerfile: Dockerfile
+        image: capstone-file:latest
+        ports:
+            - 8086:8086
+        networks:
+            - spring-cloud-network
+        environment:
+            spring.cloud.config.uri: http://config-server:9269
+            eureka.client.serviceUrl.defaultZone: http://service-registry:8761/eureka
+networks:
+    spring-cloud-network:
+        driver: bridge
