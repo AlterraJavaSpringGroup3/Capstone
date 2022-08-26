@@ -30,7 +30,7 @@ class AttendanceApplicationTests {
 
 		Attendance attendance = new Attendance();
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -46,7 +46,7 @@ class AttendanceApplicationTests {
 
 		Attendance attendance = new Attendance();
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -55,7 +55,7 @@ class AttendanceApplicationTests {
 
 		attendanceRepository.save(attendance);
 		
-		Attendance res = attendanceRepository.findByEmployeeCode("20220800001");
+		Attendance res = attendanceRepository.findByAttendancePhoto("TESTING");
 		assertNotNull(res);
 	}
 
@@ -64,7 +64,7 @@ class AttendanceApplicationTests {
 
 		Attendance attendance = new Attendance();
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -82,7 +82,7 @@ class AttendanceApplicationTests {
 		
 		Attendance attendance = new Attendance();
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -91,9 +91,9 @@ class AttendanceApplicationTests {
 
 		attendanceRepository.save(attendance);
 		
-		Attendance attendanceUpdate = attendanceRepository.findByEmployeeCode("20220800001");
+		Attendance attendanceUpdate = attendanceRepository.findByAttendancePhoto("TESTING");
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -108,7 +108,7 @@ class AttendanceApplicationTests {
 	public void testDeleteAttendance() {
 		Attendance attendance = new Attendance();
 
-		attendance.setAttendancePhoto("1b044a82b59b0ee304dae7416b442b05");
+		attendance.setAttendancePhoto("TESTING");
 		attendance.setAttendanceLong(106.8219903d);
 		attendance.setAttendanceLat(-6.3402008d);
 		attendance.setAttendanceDevicetime("2022-08-24 08:00:00");
@@ -117,10 +117,10 @@ class AttendanceApplicationTests {
 
 		attendanceRepository.save(attendance);
 		
-		Attendance attendanceDelete = attendanceRepository.findByEmployeeCode("20220800001");
+		Attendance attendanceDelete = attendanceRepository.findByAttendancePhoto("TESTING");
 
 		attendanceRepository.delete(attendanceDelete);
 
-		assertNull(attendanceRepository.findByEmployeeCode("20220800001"));
+		assertNull(attendanceRepository.findByAttendancePhoto("TESTING"));
 	}
 }
