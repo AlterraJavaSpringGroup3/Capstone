@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.user.dto.UserDto.CreateUserDto;
@@ -27,6 +28,10 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	public static String encodePasswordWithBCrypt(String plainPassword){
+	    return new BCryptPasswordEncoder().encode(plainPassword);
+	}
 
 	@SneakyThrows(Exception.class)
 	public ResponseEntity<Object> createUser(CreateUserDto dto) {
@@ -38,8 +43,11 @@ public class UserService {
 
 		User user = new User();
 
+		String userPassword = dto.getUserPassword().trim();
+		String hashedPassword = encodePasswordWithBCrypt(userPassword);
+		
 		user.setUserName(dto.getUserName().trim());
-		user.setUserPassword(dto.getUserPassword().trim());
+		user.setUserPassword(hashedPassword);
 		user.setUserRoles(dto.getUserRoles().trim());
 		user.setEmployeeCode(dto.getEmployeeCode().trim());
 
@@ -146,8 +154,11 @@ public class UserService {
 			}
 
 			if(error==0) {
+				String userPassword = dto.getUserPassword().trim();
+				String hashedPassword = encodePasswordWithBCrypt(userPassword);
+				
 				user.setUserName(dto.getUserName().trim());
-				user.setUserPassword(dto.getUserPassword().trim());
+				user.setUserPassword(hashedPassword);
 				user.setUserRoles(dto.getUserRoles().trim());
 				user.setEmployeeCode(dto.getEmployeeCode().trim());
 				

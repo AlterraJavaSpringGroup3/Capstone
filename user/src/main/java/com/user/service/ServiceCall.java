@@ -65,9 +65,4 @@ public class ServiceCall {
 		}
 		return json.toString();
 	}
-
-	public static void main(String[] args) throws IOException, JSONException {
-		String sURL = "";
-		System.out.println(json(sURL));
-	}
 }
